@@ -4,7 +4,7 @@
 # Change make_commands to False if you with to get just the SteamID32, instead of Cathook's change playerstate command
 # You do not have to "set up" a steam profile on each account for this to work, evidently.
 # Simply copy your accounts.txt and bot-profile.jpg here and run: ./auto-profile.py
-# Image format can be PNG, this script just expects the filename to be .jpg
+# Image format can be JPG, this script just expects the filename to be .png
 
 # Make sure you install dependencies first:
 # pip3 install -U steam[client]
@@ -21,7 +21,7 @@ f.close()
 data = data.replace('\r\n', '\n')
 accounts = data.split('\n')
 accounts.remove('')
-profile = open('bot-profile.jpg', 'rb')
+profile = open('bot-profile.png', 'rb')
 nickname = '[VALVุᴱ] rosne gaming'
 
 enable_debugging = False
