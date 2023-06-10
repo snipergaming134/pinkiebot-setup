@@ -1,6 +1,6 @@
 ## Catbot Setup
 
-Setup scripts for cat-bots (cathook navbots)
+download nav meshes yourself lol
 
     cd Desktop
     
