@@ -40,7 +40,7 @@ popd
 
 
 if [ -x "$(command -v pulseaudio)" ]; then
-    echo "Setting up Pulseaudio socket"
+    echo "Setting up micspam..."
     pulse=$(pgrep -u "$USER" pulseaudio);
     ([ ! -z "$pulse" ]) && pulseaudio --start &>/dev/null &
     pactl load-module module-native-protocol-unix auth-anonymous=1 socket=/tmp/pulse.sock > /tmp/pulsemodule.id
@@ -51,3 +51,5 @@ sleep 5;
 echo "IPC Web Panel password: `cat /tmp/cat-webpanel-password`"
 echo "Fixing NVIDIA crash"
 sudo chmod 700 /opt/steamapps/common/Team\ Fortress\ 2/tf/glshaders.cfg
+
+echo "Open a web browser and go to localhost:8081 to see your IPC web panel."
