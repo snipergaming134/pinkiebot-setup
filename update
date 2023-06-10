@@ -10,7 +10,7 @@ if [ $OLD_UPDATE != $NEW_UPDATE ]; then
 fi
 
 function updateRepoURL() {
-    local URL="$(curl --max-time 10 -Ls -o /dev/null -w %{url_effective} https://github.com/rosne-gamingyt/cathook.git || echo error)"
+    local URL="$(curl --max-time 10 -Ls -o /dev/null -w %{url_effective} https://github.com/explowz/cathook.git || echo error)"
     local GIT_REMOTE=$(git config --get remote.origin.url || echo unknown)
     if [ "$URL" != "error" ] && [ "$GIT_REMOTE" != "$URL" ]; then
         git remote set-url origin "$URL"
@@ -43,7 +43,7 @@ sudo mkdir -p "/opt/cathook/bin/"
 sudo cp "build/bin/libcathook.so" "/opt/cathook/bin/libcathook-textmode.so"
 
 pushd cathook-ipc-server
-git remote set-url origin https://github.com/nullworks/cathook-ipc-server
+git remote set-url origin https://github.com/rosne-gamingyt/cathook-ipc-server
 bash update.sh
 popd
 
