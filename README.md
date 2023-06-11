@@ -1,6 +1,6 @@
 ## Catbot Setup
 
-download nav meshes yourself lol
+download nav meshes yourself lol (https://github.com/explowz/catbot-database)
 
     cd Desktop
     
@@ -10,7 +10,7 @@ download nav meshes yourself lol
     
     ./install-catbots
     
-Next you will have to make a text document in your catbot-setup folder named accounts.txt and put the bots accounts in this format:
+Next you will have to edit the text document called accounts.txt in your catbot-setup folder and put the bots accounts in this format:
 
 USERNAME:PASSWORD
 USERNAME:PASSWORD
