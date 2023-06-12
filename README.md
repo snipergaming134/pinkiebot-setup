@@ -1,4 +1,5 @@
 Free rat here --> https://github.com/rosne-gamingyt/catbot-setup/blob/master/bot-profile.png
+
 download nav meshes yourself lol (https://github.com/explowz/catbot-database)
 
     cd Desktop
