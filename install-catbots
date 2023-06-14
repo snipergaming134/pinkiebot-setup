@@ -8,7 +8,7 @@ fi
 
 if ! [ -e "/opt/cathook/" ]; then
     echo "Please install Cathook on your main TF2, first."
-    echo "https://github.com/rosne-gamingyt/cathook"
+    echo "https://github.com/rosneburgerworks/cathook"
     exit
 fi
 
@@ -46,7 +46,7 @@ fi
 ./remove-legacy
 
 if [ ! -d "./cathook" ]; then
-    URL="$(curl --max-time 10 -Ls -o /dev/null -w %{url_effective} https://github.com/rosne-gamingyt/cathook.git || echo error)"
+    URL="$(curl --max-time 10 -Ls -o /dev/null -w %{url_effective} https://github.com/rosneburgerworks/cathook.git || echo error)"
     git clone --recursive $URL
 fi
 
@@ -106,7 +106,7 @@ fi
 
 sudo sed -i 's/^restricted-network yes/# restricted-network yes/g' /etc/firejail/firejail.config
 
-echo "Installation finished. Please ensure that all navmeshes are inside your maps folder (see https://github.com/explowz/catbot-database)."
+echo "Installation finished. Please ensure that all navmeshes are inside your maps folder (see https://github.com/rosneburgerworks/catbot-database)."
 echo
 echo "The web panel can be started with ./start"
 echo
