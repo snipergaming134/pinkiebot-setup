@@ -1,10 +1,10 @@
-Free rat here --> https://github.com/rosne-gamingyt/catbot-setup/blob/master/bot-profile.png
+Free burger here --> https://github.com/rosneburgerworks/catbot-setup/blob/master/bot-profile.png
 
 download nav meshes by doing ./update (doesnt install through install-catbots because of permission issues)
 
     cd Desktop
     
-    git clone https://github.com/rosne-gamingyt/catbot-setup.git
+    git clone https://github.com/rosneburgerworks/catbot-setup.git
     
     cd catbot-setup
     
