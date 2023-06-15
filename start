@@ -14,6 +14,11 @@ if ! [ -d "./user_instances" ]; then
 	exit
 fi
 
+if ! [ -d "./nullnexus-proxy" ]; then
+    echo "You need to run install-catbots in order to install the nullnexus proxy server first."
+    exit
+fi
+
 sudo mkdir -p /opt/steamapps
 mountpoint -q /opt/steamapps || sudo mount --bind ~/.steam/steam/steamapps/ /opt/steamapps
 
@@ -28,6 +33,12 @@ else
     sudo PATH="$PATH" STEAM_LD_PRELOAD="$(cd ../ && pwd)/just-disable-vac/build/bin64/libvpcfs.so.0:$(cd ../ && pwd)/just-disable-vac/build/bin32/libvpcfs.so.0" bash ./run.sh &
     popd
 fi
+
+pushd nullnexus-proxy
+PATH="$PATH" pm2 start index.js
+popd
+
+
 if [ -x "$(command -v pulseaudio)" ]; then
     echo "Setting up micspam..."
     pulse=$(pgrep -u "$USER" pulseaudio);

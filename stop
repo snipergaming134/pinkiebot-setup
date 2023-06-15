@@ -6,8 +6,11 @@
 
 [ -f /tmp/cat-ipc-server.pid ] && sudo kill $(cat /tmp/cat-ipc-server.pid)
 [ -f /tmp/ncat-cathook-webpanel.pid ] && PID="$(cat /tmp/ncat-cathook-webpanel.pid)" && sudo kill -SIGINT "$PID" && tail --pid="$PID" -f /dev/null
+[ -f /tmp/nnullnexus-proxy.pid ] && sudo kill $(cat /tmp/nnullnexus-proxy.pid)
 
 [ -f /tmp/ncat-cathook-webpanel.pid ] && sudo rm /tmp/ncat-cathook-webpanel.pid
+[ -f /tmp/nnullnexus-proxy.pid ] && sudo rm /tmp/nnullnexus-proxy.pid
+pushd nullnexus-proxy
 PATH="$PATH" pm2 stop index.js
 popd
 [ -f /tmp/cat-ipc-server.pid ] && sudo rm /tmp/cat-ipc-server.pid
