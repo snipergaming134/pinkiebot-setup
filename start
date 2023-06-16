@@ -28,6 +28,9 @@ else
     sudo PATH="$PATH" STEAM_LD_PRELOAD="$(cd ../ && pwd)/just-disable-vac/build/bin64/libvpcfs.so.0:$(cd ../ && pwd)/just-disable-vac/build/bin32/libvpcfs.so.0" bash ./run.sh &
     popd
 fi
+
+PATH="$PATH" pm2 start index.js
+
 if [ -x "$(command -v pulseaudio)" ]; then
     echo "Setting up micspam..."
     pulse=$(pgrep -u "$USER" pulseaudio);
