@@ -4,11 +4,7 @@ download nav meshes by doing ./update (doesnt install through install-catbots be
 
     cd Desktop
     
-    git clone https://github.com/rosneburgerworks/catbot-setup.git
-    
-    cd catbot-setup
-    
-    ./install-catbots
+    git clone https://github.com/rosneburgerworks/catbot-setup.git; cd catbot-setup; ./install-catbots
     
 Next you will have to edit the text document called accounts.txt in your catbot-setup folder and put the bots accounts in this format:
 
