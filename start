@@ -29,8 +29,6 @@ else
     popd
 fi
 
-PATH="$PATH" pm2 start index.js
-
 if [ -x "$(command -v pulseaudio)" ]; then
     echo "Setting up micspam..."
     pulse=$(pgrep -u "$USER" pulseaudio);
