@@ -3,7 +3,6 @@ read -p "Press ENTER to continue"
 
 ./remove-legacy
 
-rm -rf ./account-generator
 rm -rf ./build
 rm -rf ./cathook
 rm -rf ./cathook-ipc-server
