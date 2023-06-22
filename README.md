@@ -1,5 +1,5 @@
 Free burger here --> https://github.com/rosneburgerworks/catbot-setup/blob/master/bot-profile.png
-btw kill me 
+
 download nav meshes by doing ./update (doesnt install through install-catbots because of permission issues)
 
     cd Desktop
