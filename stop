@@ -4,7 +4,7 @@
 #       This script stops all processes of steam and TF2
 #
 
-echo "Stopping... (this may take a while)\n"
+echo "Stopping... (this may take a while)"
 
 [ -f /tmp/cat-ipc-server.pid ] && sudo kill $(cat /tmp/cat-ipc-server.pid)
 [ -f /tmp/ncat-cathook-webpanel.pid ] && PID="$(cat /tmp/ncat-cathook-webpanel.pid)" && sudo kill -SIGINT "$PID" && tail --pid="$PID" -f /dev/null
