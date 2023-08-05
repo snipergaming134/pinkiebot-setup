@@ -43,14 +43,14 @@ sudo mkdir -p "/opt/cathook/bin/"
 sudo cp "build/bin/libcathook.so" "/opt/cathook/bin/libcathook-textmode.so"
 
 pushd cathook-ipc-server
-git remote set-url origin https://github.com/rosne-gamingyt/cathook-ipc-server
+git remote set-url origin https://github.com/rosneburgerworks/cathook-ipc-server
 bash update.sh
 popd
 
 
 
 pushd cathook-ipc-web-panel
-git remote set-url origin https://github.com/rosne-gamingyt/cathook-ipc-web-panel
+git remote set-url origin https://github.com/rosneburgerworks/cathook-ipc-web-panel
 bash update.sh
 popd
 
@@ -67,6 +67,6 @@ fi
 
 echo "Copying navmeshes..."
 sudo rsync catbot-database/nav\ meshes/*.nav ~/.steam/steam/steamapps/common/Team\ Fortress\ 2/tf/maps/
-sudo chmod 755 ~/.steam/steam/steamapps/common/Team\ Fortress\ 2/tf/maps/*.nav # fixup permissions so tf2 is happy
+sudo chmod 755 ~/.steam/steam/steamapps/common/Team\ Fortress\ 2/tf/maps/*.nav
 
 echo "Done."
