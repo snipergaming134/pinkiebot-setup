@@ -36,11 +36,6 @@ if [ -x "$(command -v pulseaudio)" ]; then
     pactl load-module module-native-protocol-unix auth-anonymous=1 socket=/tmp/pulse.sock > /tmp/pulsemodule.id
 fi
 
-# Source lock watcher (credits to cinortaxeh)
-if [ -f "/tmp/source_engine_2925226592.lock" ]; then
-    rm -rf /tmp/source_engine_2925226592.lock
-fi
-
 sleep 5;
 
 echo "IPC Web Panel password: `cat /tmp/cat-webpanel-password`"
