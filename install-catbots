@@ -77,23 +77,23 @@ if [ ! -d "./just-disable-vac" ]; then
     popd; popd
 fi
 
-if [ ! -d "./cathook-ipc-server" ]; then
-    git clone --recursive https://github.com/rosneburgerworks/cathook-ipc-server
-    pushd cathook-ipc-server
+if [ ! -d "./rosnehook-ipc-server" ]; then
+    git clone --recursive https://github.com/rosneburgerworks/rosnehook-ipc-server
+    pushd rosnehook-ipc-server
     ./install.sh
     popd
 fi
 
-if [ ! -d "./cathook-ipc-web-panel" ]; then
-    git clone --recursive https://github.com/rosneburgerworks/cathook-ipc-web-panel
-    pushd cathook-ipc-web-panel
+if [ ! -d "./rosnehook-ipc-web-panel" ]; then
+    git clone --recursive https://github.com/rosneburgerworks/rosnehook-ipc-web-panel
+    pushd rosnehook-ipc-web-panel
     ./update.sh
     popd
 fi
 
-if [ ! -d "./cathook-ipc-web-panel/logs" ]; then
-    mkdir -p ./cathook-ipc-web-panel/logs
-    touch ./cathook-ipc-web-panel/logs/main.log
+if [ ! -d "./rosnehook-ipc-web-panel/logs" ]; then
+    mkdir -p ./rosnehook-ipc-web-panel/logs
+    touch ./rosnehook-ipc-web-panel/logs/main.log
 fi
 
 sudo sed -i 's/^restricted-network yes/# restricted-network yes/g' /etc/firejail/firejail.config

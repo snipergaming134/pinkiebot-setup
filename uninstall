@@ -7,8 +7,8 @@ echo "Removing legacy..."
 
 rm -rf ./build
 rm -rf ./cathook
-rm -rf ./cathook-ipc-server
-rm -rf ./cathook-ipc-web-panel
+rm -rf ./rosne-ipc-server
+rm -rf ./rosnehook-ipc-web-panel
 rm -rf ./just-disable-vac
 rm -rf ./user_instances
 rm -rf ./catbot-database
