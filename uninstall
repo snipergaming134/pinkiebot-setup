@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 read -p "Press ENTER to continue"
 
+echo "Removing legacy..."
+
 ./remove-legacy
 
 rm -rf ./build
