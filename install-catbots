@@ -106,11 +106,11 @@ if [ -d ~/.steam/steam/steamapps/common/Team\ Fortress\ 2/tf/maps/ ]; then
         git reset --hard origin/master
         popd
     else
-        git clone --depth 1 https://github.com/nullworks/catbot-database
+        git clone --depth 1 https://github.com/RosneBurgerworks/rosnebot-database
     fi
 
     echo "Copying navmeshes..."
-    rsync catbot-database/nav\ meshes/*.nav ~/.steam/steam/steamapps/common/Team\ Fortress\ 2/tf/maps/
+    sudo rsync catbot-database/nav\ meshes/*.nav ~/.steam/steam/steamapps/common/Team\ Fortress\ 2/tf/maps/
     sudo chmod 755 ~/.steam/steam/steamapps/common/Team\ Fortress\ 2/tf/maps/*.nav # fixup permissions so tf2 is happy
     echo "Done copying navmeshes."
 fi
