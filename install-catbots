@@ -99,9 +99,9 @@ fi
 sudo sed -i 's/^restricted-network yes/# restricted-network yes/g' /etc/firejail/firejail.config
 
 if [ -d ~/.steam/steam/steamapps/common/Team\ Fortress\ 2/tf/maps/ ]; then
-    if [ -d ./catbot-database ]; then
+    if [ -d ./rosnebot-database ]; then
         echo "Fetching navmeshes..."
-        pushd catbot-database
+        pushd rosnebot-database
         git fetch --depth 1
         git reset --hard origin/master
         popd
