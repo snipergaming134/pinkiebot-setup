@@ -2,8 +2,6 @@ Free burger here --> https://github.com/rosneburgerworks/rosnebot-setup/blob/mas
 
 download nav meshes by doing ./update (doesnt install through install-catbots because of permission issues)
 
-    cd Desktop
-    
     git clone https://github.com/rosneburgerworks/rosnebot-setup; cd rosnebot-setup; ./install-catbots; ./update
     
 Next you will have to edit the text document called accounts.txt in your catbot-setup folder and put the bots accounts in this format:
