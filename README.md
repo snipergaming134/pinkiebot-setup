@@ -1,6 +1,4 @@
-Free burger here --> https://github.com/rosneburgerworks/rosnebot-setup/blob/master/bot-profile.png
-
-download nav meshes by doing ./update (doesnt install through install-catbots because of permission issues)
+# Download and Install Rosnebots
 
     git clone https://github.com/rosneburgerworks/rosnebot-setup; cd rosnebot-setup; ./install-catbots; ./update
     
