@@ -47,7 +47,14 @@ git remote set-url origin https://github.com/rosneburgerworks/rosnehook-ipc-serv
 bash update.sh
 popd
 
-
+pushd just-disable-vac
+git pull -ff
+mkdir -p build && pushd build
+cmake .. && make
+sudo cp -r bin32 /opt/
+sudo cp -r bin64 /opt/
+popd
+popd
 
 pushd rosnehook-ipc-web-panel
 git remote set-url origin https://github.com/rosneburgerworks/rosnehook-ipc-web-panel
