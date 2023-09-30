@@ -1,6 +1,6 @@
 # Download and Install Rosnebots
 
-    git clone https://github.com/rosneburgerworks/rosnebot-setup; cd rosnebot-setup; ./install-catbots; ./update
+    git clone https://github.com/rosneburgerworks/rosnebot-setup; cd rosnebot-setup; ./install-catbots; ./update; cd .
     
 Next you will have to edit the text document called accounts.txt in your catbot-setup folder and put the bots accounts in this format:
 
