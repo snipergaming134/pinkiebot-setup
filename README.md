@@ -5,7 +5,9 @@
 Next you will have to edit the text document called accounts.txt in your catbot-setup folder and put the bots accounts in this format:
 
 USERNAME:PASSWORD
+
 USERNAME:PASSWORD
+
 USERNAME:PASSWORD
 
 ## Required Dependencies
