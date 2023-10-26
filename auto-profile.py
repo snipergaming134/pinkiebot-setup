@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
 
-# This script automatically sets up Steam avatars, nicknames and gathers the SteamID32 for bots.
-# Change make_commands to False if you with to get just the SteamID32, instead of Cathook's change playerstate command
+# This script automatically sets up Steam avatars, nicknames, and gathers the SteamID32 for bots.
+# Change make_commands to False if you wish to get just the SteamID32, instead of Cathook's change playerstate command
 # You do not have to "set up" a steam profile on each account for this to work, evidently.
 # Simply copy your accounts.txt and bot-profile.jpg here and run: ./auto-profile.py
-# Image format can be JPG, this script just expects the filename to be .png
+# Image format can be PNG, this script just expects the filename to be .jpg
+# credits to rosne-gamingyt for fixing the script
 
 # Make sure you install dependencies first:
 # pip3 install -U steam[client]
 
 import json
 import time
-
 import steam.client
 
 f = open('accounts.txt', 'r')
@@ -20,9 +20,10 @@ f.close()
 
 data = data.replace('\r\n', '\n')
 accounts = data.split('\n')
-accounts.remove('')
-profile = open('bot-profile.png', 'rb')
-nickname = '[VALVุᴱ] rosne gaming'
+accounts = [account for account in accounts if account.strip()]  # we don't want empty strings.
+
+profile = open('bot-profile.jpg', 'rb')
+nickname = 'youtube.com/@RosneGaming'
 
 enable_debugging = False
 enable_extra_info = False
@@ -30,21 +31,18 @@ enable_avatarchange = True
 enable_namechange = True
 enable_nameclear = True
 enable_set_up = True
-enable_gatherid32 = True
+enable_gatherid32 = False
 dump_response = False
 make_commands = True
 force_sleep = False
-
 
 def debug(message):
     if enable_debugging:
         print(message)
 
-
 def extra(message):
     if enable_extra_info:
         print(message)
-
 
 if enable_gatherid32:
     open('steamid32.txt', 'w').close()  # Erase any previous contents
@@ -85,58 +83,62 @@ for index, account in enumerate(accounts):
     if enable_avatarchange or enable_nameclear or enable_set_up:
         print('Getting web_session...')
         session = client.get_web_session()
-        debug(f'session.cookies: {session.cookies}')
+        if session is not None:
+            debug(f'session.cookies: {session.cookies}')
 
-        if enable_avatarchange:
-            url = 'https://steamcommunity.com/actions/FileUploader'
-            id64 = client.steam_id.as_64  # type int
-            data = {
-                'MAX_FILE_SIZE': '1048576',
-                'type': 'player_avatar_image',
-                'sId': f'{id64}',
-                'sessionid': session.cookies.get('sessionid', domain='steamcommunity.com'),
-                'doSub': '1',
-            }
-            post_cookies = {
-                'steamLogin': session.cookies.get('steamLogin', domain='steamcommunity.com'),
-                'steamLoginSecure': session.cookies.get('steamLoginSecure', domain='steamcommunity.com'),
-                'sessionid': session.cookies.get('sessionid', domain='steamcommunity.com')
-            }
-            debug(f'post_cookies: {post_cookies}')
+            if enable_avatarchange:
+                url = 'https://steamcommunity.com/actions/FileUploader'
+                id64 = client.steam_id.as_64  # type int
+                data = {
+                    'MAX_FILE_SIZE': '1048576',
+                    'type': 'player_avatar_image',
+                    'sId': f'{id64}',
+                    'sessionid': session.cookies.get('sessionid', domain='steamcommunity.com'),
+                    'doSub': '1',
+                }
+                post_cookies = {
+                    'steamLogin': session.cookies.get('steamLogin', domain='steamcommunity.com'),
+                    'steamLoginSecure': session.cookies.get('steamLoginSecure', domain='steamcommunity.com'),
+                    'sessionid': session.cookies.get('sessionid', domain='steamcommunity.com')
+                }
+                debug(f'post_cookies: {post_cookies}')
 
-            print('Setting profile picture...')
+                print('Setting profile picture...')
 
-            r = session.post(url=url, params={'type': 'player_avatar_image', 'sId': str(id64)},
-                             files={'avatar': profile},
-                             data=data, cookies=post_cookies)
-            content = r.content.decode('ascii')
-            if dump_response:
-                print(f'response: {content}')
-            if not content.startswith('<!DOCTYPE html'):
-                response = json.loads(content)
-                raise RuntimeError(f'Error setting profile: {response["message"]}')
+                r = session.post(url=url, params={'type': 'player_avatar_image', 'sId': str(id64)},
+                                 files={'avatar': profile},
+                                 data=data, cookies=post_cookies)
+                content = r.content.decode('ascii')
+                if dump_response:
+                    print(f'response: {content}')
+                if not content.startswith('<!DOCTYPE html'):
+                    response = json.loads(content)
+                    raise RuntimeError(f'Error setting profile: {response["message"]}')
 
-        if enable_nameclear:
-            print('Clearing nickname history...')
-            id64 = client.steam_id.as_64
-            r = session.post(f'https://steamcommunity.com/my/ajaxclearaliashistory/',
-                             data={'sessionid': session.cookies.get('sessionid', domain='steamcommunity.com')},
-                             cookies={'sessionid': session.cookies.get('sessionid', domain='steamcommunity.com'),
-                                      'steamLoginSecure': session.cookies.get('steamLoginSecure',
-                                                                              domain='steamcommunity.com')})
+            if enable_nameclear:
+                print('Clearing nickname history...')
+                id64 = client.steam_id.as_64
+                r = session.post(f'https://steamcommunity.com/my/ajaxclearaliashistory/',
+                                 data={'sessionid': session.cookies.get('sessionid', domain='steamcommunity.com')},
+                                 cookies={'sessionid': session.cookies.get('sessionid', domain='steamcommunity.com'),
+                                          'steamLoginSecure': session.cookies.get('steamLoginSecure',
+                                                                                  domain='steamcommunity.com')})
 
-        if enable_set_up:
-            print('Setting up community profile...')
-            r = session.post(f'https://steamcommunity.com/my/edit?welcomed=1',
-                             data={'sessionid': session.cookies.get('sessionid', domain='steamcommunity.com')},
-                             cookies={'sessionid': session.cookies.get('sessionid', domain='steamcommunity.com'),
-                                      'steamLoginSecure': session.cookies.get('steamLoginSecure',
-                                                                              domain='steamcommunity.com')})
+            if enable_set_up:
+                print('Setting up community profile...')
+                r = session.post(f'https://steamcommunity.com/my/edit?welcomed=1',
+                                 data={'sessionid': session.cookies.get('sessionid', domain='steamcommunity.com')},
+                                 cookies={'sessionid': session.cookies.get('sessionid', domain='steamcommunity.com'),
+                                          'steamLoginSecure': session.cookies.get('steamLoginSecure',
+                                                                                  domain='steamcommunity.com')})
+
+        else:
+            print("Failed to create a session. Check your authentication or network.")
 
     print('Done; logging out.')
     client.logout()
 
-    # Seek to beginning; reuse file
+    # Seek to the beginning of the profile image file; reuse the file
     profile.seek(0)
 
     # Spacing between accounts
@@ -145,7 +147,7 @@ for index, account in enumerate(accounts):
     # Only pause if we're changing avatars or setting up the community profile, and we're not at the last account,
     # we have less than or equal to 10 accounts in total, or force_sleep is set to True
     if ((enable_avatarchange or enable_set_up) and (index + 1 != len(accounts) or len(accounts) <= 10)) or force_sleep:
-        # For file avatars no more than 10 avatars per 5 minutes from each IP address
+        # For file avatars, no more than 10 avatars per 5 minutes from each IP address
         time.sleep(31)
 
 if enable_gatherid32:
@@ -153,4 +155,4 @@ if enable_gatherid32:
 
 profile.close()
 
-print('All done.')
+print('Done.')
