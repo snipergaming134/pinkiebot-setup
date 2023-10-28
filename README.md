@@ -18,4 +18,4 @@ Fedora/Centos
 `sudo dnf install nodejs firejail net-tools xorg-x11-server-utils`
 
 Arch/Manjaro/Garuda (High Support)
-`sudo pacman -Syu nodejs npm firejail net-tools xorg-xhost`
+`sudo pacman -Syu nodejs npm firejail net-tools xorg-xhost xorg-server-xvfb`
