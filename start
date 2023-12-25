@@ -1,45 +1,55 @@
 #!/bin/bash
 
 #
-#       This script starts IPC server, account generator, etc..
+# This script starts IPC server, account generator, etc.
 #
 
-if [ $EUID == 0 ]; then
-    echo "This script must not be run as root"
-    exit
+# Check if the script is run as root
+if [ $EUID -eq 0 ]; then
+    echo "Error: This script must not be run as root."
+    exit 1
 fi
 
+# Check if user_instances directory exists
 if ! [ -d "./user_instances" ]; then
-	echo "You need to run install-catbots first."
-	exit
+    echo "Error: You need to run install-catbots first."
+    exit 1
 fi
 
+# Create mountpoint and bind steamapps
 sudo mkdir -p /opt/steamapps
-mountpoint -q /opt/steamapps || sudo mount --bind ~/.steam/steam/steamapps/ /opt/steamapps
+if ! mountpoint -q /opt/steamapps; then
+    sudo mount --bind ~/.steam/steam/steamapps/ /opt/steamapps || { echo "Error: Failed to bind steamapps."; exit 1; }
+fi
 
-ipcserver=$( ps faux | grep '/opt/cathook/ipc/bin/server' | grep -vw grep | awk '{ print $2 }' );
-[ -z "$ipcserver" ] && /opt/cathook/ipc/bin/server -s >/dev/null &
-[ -z "$ipcserver" ] && echo $! >/tmp/cat-ipc-server.pid
+# Start IPC server if not already running
+ipcserver=$(ps faux | grep '/opt/cathook/ipc/bin/server' | grep -vw grep | awk '{ print $2 }')
+if [ -z "$ipcserver" ]; then
+    /opt/cathook/ipc/bin/server -s >/dev/null &
+    echo $! >/tmp/cat-ipc-server.pid
+fi
 
-if [ -e "/tmp/ncat-cathook-webpanel.pid" ] && ps -p `cat "/tmp/ncat-cathook-webpanel.pid"` >/dev/null; then
-    echo IPC panel already running.
-else
+# Start IPC Web Panel
+if [ ! -e "/tmp/ncat-cathook-webpanel.pid" ] || ! ps -p "$(cat "/tmp/ncat-cathook-webpanel.pid")" >/dev/null; then
     pushd rosnehook-ipc-web-panel
     sudo PATH="$PATH" STEAM_LD_PRELOAD="$(cd ../ && pwd)/just-disable-vac/build/bin64/libvpcfs.so.0:$(cd ../ && pwd)/just-disable-vac/build/bin32/libvpcfs.so.0" bash ./run.sh &
     popd
 fi
 
-
-
-echo "Starting Micspam"
+# Start Micspam
+echo "Starting Micspam..."
 pactl load-module module-null-sink
 
+# Display IPC Web Panel password
+echo "IPC Web Panel password: $(cat /tmp/cat-webpanel-password)"
 
-echo "IPC Web Panel password: `cat /tmp/cat-webpanel-password`"
-sudo chmod 700 /opt/steamapps/common/Team\ Fortress\ 2/tf/glshaders.cfg
+
+sudo chmod 700 "/opt/steamapps/common/Team Fortress 2/tf/glshaders.cfg"
+
+# Ask user about XVFB
 read -r -p "Would you like to use XVFB? [y/N] " response
-if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
-then
-Xvfb :0 -screen 0 640x200x24 +extension GLX -maxclients 2048 & export DISPLAY=:0
+if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]; then
+    Xvfb :0 -screen 0 640x200x24 +extension GLX -maxclients 2048 & export DISPLAY=:0
 fi
+
 echo "Open a web browser and go to localhost:8081 to see your Rosnehook IPC web panel."
