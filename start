@@ -44,10 +44,4 @@ echo "IPC Web Panel password: `cat /tmp/cat-webpanel-password`"
 echo "Fixing NVIDIA crash"
 sudo chmod 700 /opt/steamapps/common/Team\ Fortress\ 2/tf/glshaders.cfg
 
-# Ask user about XVFB
-read -r -p "Would you like to use XVFB? (Advanced users only) [y/N] " response
-if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]; then
-    Xvfb :0 -screen 0 640x200x24 +extension GLX -maxclients 2048 & export DISPLAY=:0
-fi
-
 echo "Open a web browser and go to localhost:8081 to see your Rosnehook IPC web panel."
