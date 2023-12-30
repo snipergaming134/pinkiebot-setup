@@ -34,8 +34,6 @@ if [ -x "$(command -v pulseaudio)" ]; then
     pulse=$(pgrep -u "$USER" pulseaudio);
     ([ ! -z "$pulse" ]) && pulseaudio --start &>/dev/null &
     pactl load-module module-native-protocol-unix auth-anonymous=1 socket=/tmp/pulse.sock > /tmp/pulsemodule.id
-    pactl load-module module-null-sink
-    echo "Null sink has been loaded! (Micspam)"
 fi
 
 sleep 5;
