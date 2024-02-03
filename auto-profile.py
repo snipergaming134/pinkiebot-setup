@@ -92,28 +92,27 @@ for index, account in enumerate(accounts):
                 data = {
                     'MAX_FILE_SIZE': '1048576',
                     'type': 'player_avatar_image',
-                    'sId': f'{id64}',
+                    'sId': str(id64),
                     'sessionid': session.cookies.get('sessionid', domain='steamcommunity.com'),
                     'doSub': '1',
                 }
                 post_cookies = {
-                    'steamLogin': session.cookies.get('steamLogin', domain='steamcommunity.com'),
-                    'steamLoginSecure': session.cookies.get('steamLoginSecure', domain='steamcommunity.com'),
-                    'sessionid': session.cookies.get('sessionid', domain='steamcommunity.com')
+                    'sessionid': session.cookies.get('sessionid', domain='steamcommunity.com'),
+                    'steamLoginSecure': session.cookies.get('steamLoginSecure', domain='steamcommunity.com')
                 }
-                debug(f'post_cookies: {post_cookies}')
 
                 print('Setting profile picture...')
 
                 r = session.post(url=url, params={'type': 'player_avatar_image', 'sId': str(id64)},
-                                 files={'avatar': profile},
-                                 data=data, cookies=post_cookies)
+                                files={'avatar': profile},
+                                data=data, cookies=post_cookies)
                 content = r.content.decode('ascii')
                 if dump_response:
                     print(f'response: {content}')
                 if not content.startswith('<!DOCTYPE html'):
                     response = json.loads(content)
-                    raise RuntimeError(f'Error setting profile: {response["message"]}')
+                    if 'message' in response:
+                        raise RuntimeError(f'Error setting profile: {response["message"]}')
 
             if enable_nameclear:
                 print('Clearing nickname history...')
