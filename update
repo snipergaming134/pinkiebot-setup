@@ -42,8 +42,8 @@ popd
 sudo mkdir -p "/opt/cathook/bin/"
 sudo cp "build/bin/libcathook.so" "/opt/cathook/bin/libcathook-textmode.so"
 
-pushd pinkiehook-ipc-server
-git remote set-url origin https://github.com/snipergaming134/pinkiehook-ipc-web-server
+pushd rosnehook-ipc-web-server
+git remote set-url origin https://github.com/rosneburgerworks/rosnehook-ipc-web-panel
 bash update.sh
 popd
 
