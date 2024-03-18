@@ -56,12 +56,6 @@ sudo cp -r bin64 /opt/
 popd
 popd
 
-pushd pinkiehook-ipc-web-panel
-git remote set-url origin https://github.com/snipergaming134/pinkiehook-ipc-web-panel
-bash update.sh
-popd
-
-
 echo "Fetching navmeshes..."
 if [ -d ./pinkiebot-database ]; then
 	pushd pinkiebot-database
