@@ -43,7 +43,7 @@ sudo mkdir -p "/opt/cathook/bin/"
 sudo cp "build/bin/libcathook.so" "/opt/cathook/bin/libcathook-textmode.so"
 
 pushd pinkiehook-ipc-server
-git remote set-url origin https://github.com/snipergaming134/pinkiehook-ipc-web-panel
+git remote set-url origin https://github.com/snipergaming134/pinkiehook-ipc-web-server
 bash update.sh
 popd
 
@@ -54,6 +54,11 @@ cmake .. && make
 sudo cp -r bin32 /opt/
 sudo cp -r bin64 /opt/
 popd
+popd
+
+pushd pinkiehook-ipc-web-panel
+git remote set-url origin https://github.com/snipergaming134/pinkiehook-ipc-web-panel
+bash update.sh
 popd
 
 echo "Fetching navmeshes..."
