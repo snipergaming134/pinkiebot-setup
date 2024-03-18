@@ -56,15 +56,15 @@ sudo cp -r bin64 /opt/
 popd
 popd
 
-pushd rosnehook-ipc-web-panel
+pushd pinkiehook-ipc-web-panel
 git remote set-url origin https://github.com/snipergaming134/pinkiehook-ipc-web-panel
 bash update.sh
 popd
 
 
 echo "Fetching navmeshes..."
-if [ -d ./rosnebot-database ]; then
-	pushd rosnebot-database
+if [ -d ./pinkiebot-database ]; then
+	pushd pinkiebot-database
 	git fetch --depth 1
 	git reset --hard origin/master
 	popd
@@ -73,7 +73,7 @@ else
 fi
 
 echo "Copying navmeshes..."
-sudo rsync rosnebot-database/nav\ meshes/*.nav ~/.steam/steam/steamapps/common/Team\ Fortress\ 2/tf/maps/
+sudo rsync pinkiebot-database/nav\ meshes/*.nav ~/.steam/steam/steamapps/common/Team\ Fortress\ 2/tf/maps/
 sudo chmod 755 ~/.steam/steam/steamapps/common/Team\ Fortress\ 2/tf/maps/*.nav
 
 echo "Done."
