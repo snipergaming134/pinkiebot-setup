@@ -47,7 +47,7 @@ fi
 
 ./remove-legacy
 
-if [ ! -d "./temprosnehook" ]; then
+if [ ! -d "./pinkiehook" ]; then
     URL="$(curl --max-time 10 -Ls -o /dev/null -w %{url_effective} https://github.com/snipergaming134/pinkiehook.git || echo error)"
     git clone --recursive $URL
 fi
@@ -72,7 +72,7 @@ if [ ! -f /opt/cathook/bin/libcathook-textmode.so ]; then
 fi
 
 if [ ! -d "./just-disable-vac" ]; then
-    git clone https://github.com/rosneburgerworks/just-disable-vac
+    git clone https://github.com/snipergaming134/just-disable-vac
     pushd just-disable-vac
     mkdir -p build && pushd build
     cmake .. && make
