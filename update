@@ -57,7 +57,7 @@ popd
 popd
 
 pushd rosnehook-ipc-web-panel
-git remote set-url origin https://github.com/snipergaming134/pinkiehook-ipc-web-server
+git remote set-url origin https://github.com/rosneburgerworks/rosnehook-ipc-web-panel
 bash update.sh
 popd
 
