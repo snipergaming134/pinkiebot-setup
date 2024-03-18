@@ -42,4 +42,4 @@ echo "IPC Web Panel password: `cat /tmp/cat-webpanel-password`"
 echo "Fixing NVIDIA crash"
 sudo chmod 700 /opt/steamapps/common/Team\ Fortress\ 2/tf/glshaders.cfg
 
-echo "Open a web browser and go to localhost:8081 to see your Rosnehook IPC web panel."
+echo "Open a web browser and go to localhost:8081 to see your Pinkiehook IPC web panel."
