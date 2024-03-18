@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+r#!/usr/bin/env bash
 
 OLD_UPDATE=$(git rev-parse HEAD:update)
 git pull --ff
@@ -57,7 +57,7 @@ popd
 popd
 
 pushd pinkiehook-ipc-web-panel
-git remote set-url origin https://github.com/snipergaming134/pinkiehook-ipc-web-panel
+git remote set-url origin https://github.com/snipergaming134/pinkiehook-ipc-web-server
 bash update.sh
 popd
 
