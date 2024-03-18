@@ -8,8 +8,8 @@ fi
 
 if ! [ -e "/opt/cathook/" ]; then
     echo
-    echo "Please install Rosnehook on your main TF2, first."
-    echo "https://github.com/rosneburgerworks/pinkiehook"
+    echo "Please install Pinkiehook on your main TF2, first."
+    echo "https://github.com/snipergaming134/pinkiebot-setup"
     echo
     exit
 fi
@@ -48,7 +48,7 @@ fi
 ./remove-legacy
 
 if [ ! -d "./temprosnehook" ]; then
-    URL="$(curl --max-time 10 -Ls -o /dev/null -w %{url_effective} https://github.com/rosneburgerworks/temprosnehook.git || echo error)"
+    URL="$(curl --max-time 10 -Ls -o /dev/null -w %{url_effective} https://github.com/snipergaming134/pinkiehook.git || echo error)"
     git clone --recursive $URL
 fi
 
@@ -58,7 +58,7 @@ if [ ! -f /opt/cathook/bin/libcathook-textmode.so ]; then
     numcpu=$(grep -c ^processor /proc/cpuinfo)
     mkdir -p build
     pushd build
-    cmake -DCMAKE_BUILD_TYPE=Release -DVisuals_DrawType="Textmode" -DVACBypass=1 -DEnableWarnings=0 ../temprosnehook/
+    cmake -DCMAKE_BUILD_TYPE=Release -DVisuals_DrawType="Textmode" -DVACBypass=1 -DEnableWarnings=0 ../pinkiehook/
     make -j$numcpu
     if ! [ -e "bin/libcathook.so" ]; then
         echo "FATAL: Build failed"
@@ -79,23 +79,23 @@ if [ ! -d "./just-disable-vac" ]; then
     popd; popd
 fi
 
-if [ ! -d "./rosnehook-ipc-server" ]; then
-    git clone --recursive https://github.com/rosneburgerworks/rosnehook-ipc-server
-    pushd rosnehook-ipc-server
+if [ ! -d "./pinkiehook-ipc-server" ]; then
+    git clone --recursive https://github.com/snipergaming134/pinkiehook-ipc-server
+    pushd pinkiehook-ipc-server
     ./install.sh
     popd
 fi
 
-if [ ! -d "./rosnehook-ipc-web-panel" ]; then
-    git clone --recursive https://github.com/rosneburgerworks/rosnehook-ipc-web-panel
+if [ ! -d "./pinkiehook-ipc-web-panel" ]; then
+    git clone --recursive https://github.com/snipergaming134/pinkiehook-ipc-web-panel
     pushd rosnehook-ipc-web-panel
     ./update.sh
     popd
 fi
 
-if [ ! -d "./rosnehook-ipc-web-panel/logs" ]; then
-    mkdir -p ./rosnehook-ipc-web-panel/logs
-    touch ./rosnehook-ipc-web-panel/logs/main.log
+if [ ! -d "./pinkiehook-ipc-web-panel/logs" ]; then
+    mkdir -p ./pinkiehook-ipc-web-panel/logs
+    touch ./pinkiehook-ipc-web-panel/logs/main.log
 fi
 
 sudo sed -i 's/^restricted-network yes/# restricted-network yes/g' /etc/firejail/firejail.config
@@ -108,7 +108,7 @@ if [ -d ~/.steam/steam/steamapps/common/Team\ Fortress\ 2/tf/maps/ ]; then
         git reset --hard origin/master
         popd
     else
-        git clone --depth 1 https://github.com/RosneBurgerworks/pinkiebot-database
+        git clone --depth 1 https://github.com/snipergaming134/pinkiebot-database
     fi
 
     echo "Copying navmeshes..."
