@@ -42,7 +42,7 @@ popd
 sudo mkdir -p "/opt/cathook/bin/"
 sudo cp "build/bin/libcathook.so" "/opt/cathook/bin/libcathook-textmode.so"
 
-pushd rosnehook-ipc-server
+pushd pinkiehook-ipc-server
 git remote set-url origin https://github.com/snipergaming134/pinkiehook-ipc-server
 bash update.sh
 popd
@@ -56,7 +56,7 @@ sudo cp -r bin64 /opt/
 popd
 popd
 
-pushd rosnehook-ipc-web-panel
+pushd pinkiehook-ipc-web-panel
 git remote set-url origin https://github.com/snipergaming134/pinkiehook-ipc-web-panel
 bash update.sh
 popd
@@ -64,7 +64,7 @@ popd
 
 echo "Fetching navmeshes..."
 if [ -d ./rosnebot-database ]; then
-	pushd rosnebot-database
+	pushd pinkiebot-database
 	git fetch --depth 1
 	git reset --hard origin/master
 	popd
