@@ -88,7 +88,7 @@ fi
 
 if [ ! -d "./pinkiehook-ipc-web-panel" ]; then
     git clone --recursive https://github.com/snipergaming134/pinkiehook-ipc-web-panel
-    pushd rosnehook-ipc-web-panel
+    pushd pinkiehook-ipc-web-panel
     ./update.sh
     popd
 fi
